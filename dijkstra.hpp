@@ -7,29 +7,23 @@
 #define infinity std::numeric_limits<int>::max()
 
 
-class Dijkstra
-{
-public:
-    int nodes;
+class Dijkstra{
+private:
+    int vertices;
     int source;
     int target;
-    int current;
-    std::vector<int> visited;
-    std::vector<int> unvisited;
+    std::vector<bool> visited;
+    std::vector<int> path;
     std::vector<int> previous;
     int** graph;
-
-    Dijkstra(int nodes);
+public:
+    Dijkstra(int vertices);
     ~Dijkstra();
-
     void setGrid();
     inline void setSource();
     inline void setTarget();
-    inline void initCost();
     void shortestPath();
     void runAlgorithm();
-    
-
 };
 
 #endif // HEADER_HPP

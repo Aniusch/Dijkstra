@@ -2,22 +2,25 @@
 #include <vector>
 #include "dijkstra.hpp"
 
-Dijkstra::Dijkstra(int nodes){
-    this->nodes = nodes;
-    this->graph = new int*[nodes];
-    for(int i = 0; i < nodes; i++){
-        this->graph[i] = new int[nodes];
+
+Dijkstra::Dijkstra(int vertices){
+    this->vertices = vertices;
+    this->graph = new int*[vertices];
+    this->visited.resize(vertices);
+    this->path.resize(vertices);
+    for(int i = 0; i < vertices; i++){
+        this->graph[i] = new int[vertices];
+        this->visited[i] = false;
+        this->previous[i] = -1;
+        this->path[i] = infinity;
     }
-    this->visited.resize(nodes);
-    this->unvisited.resize(nodes);
     this->source = 0;
     this->target = 0;
-    this->current = 0;
     return;
 }
 
 Dijkstra::~Dijkstra(){
-    for(int i = 0; i < this->nodes; i++){
+    for(int i = 0; i < this->vertices; i++){
         delete[] this->graph[i];
     }
     delete[] this->graph;
@@ -26,8 +29,8 @@ Dijkstra::~Dijkstra(){
 
 void Dijkstra::setGrid(){
     int temp;
-    for(int i = 0; i < this->nodes; i++){
-        for(int j = 0; j < this->nodes; j++){
+    for(int i = 0; i < this->vertices; i++){
+        for(int j = 0; j < this->vertices; j++){
             if(i == j){
                 this->graph[i][j] = 0;
                 continue;
@@ -52,25 +55,41 @@ inline void Dijkstra::setTarget(){
     return;
 }
 
-//check the final algortihm
 void Dijkstra::shortestPath(){
-
+    this->path[this->source] = 0;
+    int min = infinity;
+    int minIndex = 0;
+    
+    for(int i = 0; i < this->vertices; i++){
+        if(this->path[i] < min && !this->visited[i]){
+            min = this->path[i];
+            minIndex = i;
+        }
+        for(int adj{}; adj < this->vertices; adj++){
+            if(this->graph[minIndex][adj] != 0 && !this->visited[adj]){
+                if(this->path[adj] > this->path[minIndex] + this->graph[minIndex][adj]){
+                    this->path[adj] = this->path[minIndex] + this->graph[minIndex][adj];
+                    this->previous[adj] = minIndex;
+                }
+            }
+        }
+    }
     return;
 }
+
 
 void Dijkstra::runAlgorithm(){
     this->setGrid();
     this->setSource();
-    this->shortestPath();
     std::cout << "monstrar caminho('s' ou 'n'): ";
     char answer;
     std::cin >> answer;
     if(answer == 'n'){return;}
     do{
-        this->setTarget();
-        std::cout << this->target << " <- ";
-        this->target = this->previous[this->target];   
-    }while(this->target != -1);
+        this->shortestPath();
+        std::cout << "monstrar caminho('s' ou 'n'): ";
+        std::cin >> answer;
+    }while(answer == 's');
     
     this->setTarget();
     return;
