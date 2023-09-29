@@ -10,6 +10,6 @@ int main(){
     if(nodes < 1){return 1;}
 
     Dijkstra dijkstra(nodes);
-    dijkstra.runAlg();
+    dijkstra.runAlgorithm();
     return 0;
 }

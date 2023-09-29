@@ -1,31 +1,35 @@
-#ifndef HEADER_H 
-#define HEADER_H
+#ifndef HEADER_HPP
+#define HEADER_HPP
 
-#define infinity 9999
+#include <vector>
+#include <limits>
+
+#define infinity std::numeric_limits<int>::max()
+
 
 class Dijkstra
 {
 public:
     int nodes;
-    int** grid;
-    int** adjGrid;
-    std::vector<int> visited;
-    std::vector<int> unvisited;
-    std::vector<int> distance;
-    std::vector<int> previous;
     int source;
-
     int target;
     int current;
+    std::vector<int> visited;
+    std::vector<int> unvisited;
+    std::vector<int> previous;
+    int** graph;
 
     Dijkstra(int nodes);
     ~Dijkstra();
-    void setSource();
-    void setTarget();
-    void setGrid(const int& i, const int& j, const int& value);
-    void initAdjGrid();
-    void runAlg();
+
+    void setGrid();
+    inline void setSource();
+    inline void setTarget();
+    inline void initCost();
+    void shortestPath();
+    void runAlgorithm();
     
+
 };
 
-#endif // HEADER_H
+#endif // HEADER_HPP
