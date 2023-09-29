@@ -4,13 +4,13 @@
 
 Dijkstra::Dijkstra(int nodes){
     this->nodes = nodes;
-    this->grid = new int*[nodes-1];
-    for(int i{}; i < nodes-1; i++){
-        this->grid[i] = new int[nodes-1];
+    this->grid = new int*[nodes];
+    for(int i{}; i < nodes; i++){
+        this->grid[i] = new int[nodes];
     }
-    this->adjGrid = new int*[nodes-1];
-    for(int i{}; i < nodes-1; i++){
-        this->adjGrid[i] = new int[nodes-1];
+    this->adjGrid = new int*[nodes];
+    for(int i{}; i < nodes; i++){
+        this->adjGrid[i] = new int[nodes];
     }
     this->visited.resize(nodes);
     this->unvisited.resize(nodes);
@@ -23,13 +23,13 @@ Dijkstra::Dijkstra(int nodes){
 
 Dijkstra::~Dijkstra()
 {
-    for(int i{}; i < this->nodes - 1; i++){
+    for(int i{}; i < this->nodes; i++){
         delete[] this->grid[i];
     }
     delete[] this->grid;
     
     
-    for(int i{}; i < this->nodes-1; i++){
+    for(int i{}; i < this->nodes; i++){
         delete[] this->adjGrid[i];
     }
     delete[] this->adjGrid;
@@ -55,8 +55,8 @@ void Dijkstra::setGrid(const int& i, const int& j, const int& value){
 
 void Dijkstra::initAdjGrid(){
     int temp{};
-    for(int i{}; i < this->nodes-1; i++){
-        for(int j{}; j < this->nodes-1; j++){
+    for(int i{}; i < this->nodes; i++){
+        for(int j{}; j < this->nodes; j++){
             if(i == j){
                 adjGrid[i][j] = 0;  
             }else{
@@ -71,7 +71,7 @@ void Dijkstra::initAdjGrid(){
         }
     } 
 
-    for(int i{}; i < this->nodes - 1; i++){
+    for(int i{}; i < this->nodes ; i++){
         this->unvisited[i] = i;
         this->distance[i] = infinity;
         this->previous[i] = -1;
@@ -88,26 +88,34 @@ void Dijkstra::runAlg(){
     this->setTarget();
     while(!this->unvisited.empty()){
         int min = infinity;
-        for(int i{}; i < this->unvisited.size(); i++){
-            if(this->distance[this->unvisited[i]] < min){
-                min = this->distance[this->unvisited[i]];
-                this->current = this->unvisited[i];
+        for(int i{}; i < this->nodes; i++){
+            if(this->distance[i] < min){
+                min = this->distance[i];
+                this->current = i;
             }
         }
-        for(int i{}; i < this->unvisited.size(); i++){
-            if(this->unvisited[i] == this->current){
-                this->unvisited.erase(this->unvisited.begin() + i);
-                break;
-            }
-        }
-        for(int i{}; i < this->nodes - 1; i++){
-            if(this->adjGrid[this->current][i] != 0){
-                int alt = this->distance[this->current] + this->adjGrid[this->current][i];
-                if(alt < this->distance[i]){
-                    this->distance[i] = alt;
+        for(int i{}; i < this->nodes; i++){
+            if(this->adjGrid[this->current][i] != infinity){
+                if(this->distance[i] > this->distance[this->current] + this->adjGrid[this->current][i]){
+                    this->distance[i] = this->distance[this->current] + this->adjGrid[this->current][i];
                     this->previous[i] = this->current;
                 }
             }
+        }
+        this->visited.push_back(this->current);
+        this->unvisited.erase(this->unvisited.begin() + this->current);
+
+        if(this->current == this->target){
+            std::cout << "caminho: ";
+            int temp = this->target;
+            while(temp != this->source){
+                std::cout << temp << " <- ";
+                temp = this->previous[temp];
+            }
+            std::cout << this->source << std::endl;
+            std::cout << "custo: " << this->distance[this->target] << std::endl;
+            
+            break;
         }
     }
     return;
