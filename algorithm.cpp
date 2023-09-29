@@ -74,6 +74,18 @@ void Dijkstra::shortestPath(){
             }
         }
     }
+    std::cout << "custo: " << this->path[this->target] << std::endl;
+    std::cout << "caminho: ";
+    //show path from source to target
+    std::vector<int> showPath;
+    int temp = this->target;
+    while(temp != this->source){
+        showPath.push_back(temp);
+        temp = this->previous[temp];
+    }
+    for(int i = showPath.size() - 1; i >= 0; i--){
+        std::cout << showPath[i] << "->";
+    }
     return;
 }
 
