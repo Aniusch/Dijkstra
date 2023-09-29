@@ -113,6 +113,8 @@ void Dijkstra::shortestPath(){
         temp = showPath[i] + 1;
         std::cout << "->" << temp;
     }
+    std::cout << std::endl;
+    
     return;
 }
 
