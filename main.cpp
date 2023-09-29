@@ -14,6 +14,6 @@ int main(){
     dijkstra.setSource();
     dijkstra.setTarget();
     dijkstra.algorithm();
-    
+
     return 0;
 }

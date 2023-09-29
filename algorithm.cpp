@@ -2,11 +2,15 @@
 #include <vector>
 #include "dijkstra.hpp"
 
-Dijkstra::Dijkstra(int& nodes){
+Dijkstra::Dijkstra(int nodes){
     this->nodes = nodes;
-    this->adjGrid = new int*[nodes];
-    for(int i{}; i < nodes - 1; i++){
-        this->grid[i] = new int[nodes];
+    this->grid = new int*[nodes-1];
+    for(int i{}; i < nodes-1; i++){
+        this->grid[i] = new int[nodes-1];
+    }
+    this->adjGrid = new int*[nodes-1];
+    for(int i{}; i < nodes-1; i++){
+        this->adjGrid[i] = new int[nodes-1];
     }
     this->visited.resize(nodes);
     this->unvisited.resize(nodes);
@@ -53,11 +57,12 @@ void Dijkstra::initAdjGrid(){
     for(int i{}; i < this->nodes-1; i++){
         for(int j{}; j < this->nodes-1; j++){
             if (i = j) {
-                adjGrid[i][j] = 0;
-                continue;
+                adjGrid[i][j] = 0;   
             }
-            std::cout << "mAdj(" << i << ", " << j << "): ";
-            std::cin >> adjGrid[i][j];
+            else{
+                std::cout << "mAdj(" << i << ", " << j << "): ";
+                std::cin >> adjGrid[i][j];
+            }
         }
     }   
     for(int i{}; i < this->nodes - 1; i++){

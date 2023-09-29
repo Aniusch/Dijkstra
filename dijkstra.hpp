@@ -18,7 +18,7 @@ public:
     int target;
     int current;
 
-    Dijkstra(int& nodes);
+    Dijkstra(int nodes);
     ~Dijkstra();
     void setSource();
     void setTarget();
