@@ -3,7 +3,7 @@
 #include "dijkstra.hpp"
 
 Dijkstra::Dijkstra(int& nodes){
-    this->nodes = &nodes;
+    this->nodes = nodes;
     this->adjGrid = new int*[nodes];
     for(int i{}; i < nodes - 1; i++){
         this->grid[i] = new int[nodes];
@@ -19,13 +19,13 @@ Dijkstra::Dijkstra(int& nodes){
 
 Dijkstra::~Dijkstra()
 {
-    for(int i{}; i < *this->nodes - 1; i++){
+    for(int i{}; i < this->nodes - 1; i++){
         delete[] this->grid[i];
     }
     delete[] this->grid;
     
     
-    for(int i{}; i < *this->nodes-1; i++){
+    for(int i{}; i < this->nodes-1; i++){
         delete[] this->adjGrid[i];
     }
     delete[] this->adjGrid;
@@ -50,8 +50,8 @@ void Dijkstra::setGrid(const int& i, const int& j, const int& value){
 }
 
 void Dijkstra::initAdjGrid(){
-    for(int i{}; i < *this->nodes-1; i++){
-        for(int j{}; j < *this->nodes-1; j++){
+    for(int i{}; i < this->nodes-1; i++){
+        for(int j{}; j < this->nodes-1; j++){
             if (i = j) {
                 adjGrid[i][j] = 0;
                 continue;
@@ -60,7 +60,7 @@ void Dijkstra::initAdjGrid(){
             std::cin >> adjGrid[i][j];
         }
     }   
-    for(int i{}; i < *this->nodes - 1; i++){
+    for(int i{}; i < this->nodes - 1; i++){
         this->unvisited[i] = i;
         this->distance[i] = infinity;
         this->previous[i] = -1;
@@ -85,7 +85,7 @@ void Dijkstra::algorithm(){
                 break;
             }
         }
-        for(int i{}; i < *this->nodes - 1; i++){
+        for(int i{}; i < this->nodes - 1; i++){
             if(this->adjGrid[this->current][i] != 0){
                 int alt = this->distance[this->current] + this->adjGrid[this->current][i];
                 if(alt < this->distance[i]){

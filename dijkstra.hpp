@@ -6,7 +6,7 @@
 class Dijkstra
 {
 public:
-    int* nodes;
+    int nodes;
     int** grid;
     int** adjGrid;
     std::vector<int> visited;
@@ -14,6 +14,7 @@ public:
     std::vector<int> distance;
     std::vector<int> previous;
     int source;
+
     int target;
     int current;
 

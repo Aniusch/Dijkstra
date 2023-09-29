@@ -12,9 +12,8 @@ int main(){
     Dijkstra dijkstra(nodes);
     dijkstra.initAdjGrid();
     dijkstra.setSource();
-        
-    while(true){
-
-    }
+    dijkstra.setTarget();
+    dijkstra.algorithm();
+    
     return 0;
 }
