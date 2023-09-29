@@ -62,7 +62,6 @@ void Dijkstra::shortestPath(){
 void Dijkstra::runAlgorithm(){
     this->setGrid();
     this->setSource();
-    this->setCost();
     this->shortestPath();
     std::cout << "monstrar caminho('s' ou 'n'): ";
     char answer;
