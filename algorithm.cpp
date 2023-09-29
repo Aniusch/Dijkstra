@@ -10,7 +10,6 @@ Dijkstra::Dijkstra(int nodes){
     }
     this->visited.resize(nodes);
     this->unvisited.resize(nodes);
-    this->cost.resize(nodes);
     this->source = 0;
     this->target = 0;
     this->current = 0;
