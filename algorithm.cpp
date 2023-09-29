@@ -54,17 +54,23 @@ void Dijkstra::setGrid(const int& i, const int& j, const int& value){
 }
 
 void Dijkstra::initAdjGrid(){
+    int temp{};
     for(int i{}; i < this->nodes-1; i++){
         for(int j{}; j < this->nodes-1; j++){
-            if (i = j) {
-                adjGrid[i][j] = 0;   
-            }
-            else{
+            if(i == j){
+                adjGrid[i][j] = 0;  
+            }else{
                 std::cout << "mAdj(" << i << ", " << j << "): ";
-                std::cin >> adjGrid[i][j];
+                std::cin >> temp;
+
+                if(temp < 0){
+                    adjGrid[i][j] = infinity;
+                }
+                adjGrid[i][j] = temp;
             }
         }
-    }   
+    } 
+
     for(int i{}; i < this->nodes - 1; i++){
         this->unvisited[i] = i;
         this->distance[i] = infinity;
@@ -74,8 +80,12 @@ void Dijkstra::initAdjGrid(){
     return;
 }
 
+
 //check the final algortihm
-void Dijkstra::algorithm(){
+void Dijkstra::runAlg(){
+    this->initAdjGrid();
+    this->setSource();
+    this->setTarget();
     while(!this->unvisited.empty()){
         int min = infinity;
         for(int i{}; i < this->unvisited.size(); i++){

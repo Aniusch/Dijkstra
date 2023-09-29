@@ -24,7 +24,7 @@ public:
     void setTarget();
     void setGrid(const int& i, const int& j, const int& value);
     void initAdjGrid();
-    void algorithm();
+    void runAlg();
     
 };
 

@@ -10,10 +10,6 @@ int main(){
     if(nodes < 1){return 1;}
 
     Dijkstra dijkstra(nodes);
-    dijkstra.initAdjGrid();
-    dijkstra.setSource();
-    dijkstra.setTarget();
-    dijkstra.algorithm();
-
+    dijkstra.runAlg();
     return 0;
 }
