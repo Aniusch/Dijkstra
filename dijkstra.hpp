@@ -20,8 +20,9 @@ public:
     Dijkstra(int vertices);
     ~Dijkstra();
     void setGrid();
-    inline void setSource();
-    inline void setTarget();
+    void setSource();
+    void setTarget();
+    int findMin();
     void shortestPath();
     void runAlgorithm();
 };
