@@ -6,7 +6,6 @@
 
 #define infinity std::numeric_limits<int>::max()
 
-
 class Dijkstra{
 private:
     int vertices;

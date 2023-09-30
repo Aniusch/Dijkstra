@@ -131,8 +131,6 @@ void Dijkstra::runAlgorithm(){
         std::cout << "monstrar caminho('s' ou 'n'): ";
         std::cin >> answer;
     }
-
-    this->setTarget();
     return;
 }
 
