@@ -94,7 +94,7 @@ void Dijkstra::shortestPath(){
     }
 
     if(this->path[this->target] == infinity){
-        std::cout << "custo: inf" << '\n';
+        std::cout << "custo: Inf" << '\n';
         std::cout << "nao existe um caminho entre " << this->source + 1 << " e " << this->target + 1 << std::endl;
         return;
     }
@@ -122,13 +122,13 @@ void Dijkstra::shortestPath(){
 void Dijkstra::runAlgorithm(){
     this->setGrid();
     this->setSource();
-    std::cout << "monstrar caminho('s' ou 'n'): ";
+    std::cout << "mostrar caminho('s' ou 'n'): ";
     char answer;
     std::cin >> answer;
     if(answer == 'n'){return;}
     while (answer == 's'){
         this->shortestPath();
-        std::cout << "monstrar caminho('s' ou 'n'): ";
+        std::cout << "mostrar caminho('s' ou 'n'): ";
         std::cin >> answer;
     }
     return;
